@@ -9,6 +9,6 @@ export const fetchPhones = createAsyncThunk("phones/fetchPhones", async () => {
   return response.data;
 });
 
-export const fetchPhonesOperation = () => {
-  return fetchPhones;
-};
+// export const fetchPhonesOperation = () => {
+//   return fetchPhones;
+// };
