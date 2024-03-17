@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "../redux/store";
 import { getPhones } from "../redux/selectors";
 import { fetchPhones } from "../redux/operations";
 import React from "react";
-
+import "tailwindcss/tailwind.css";
 function HomePage() {
   const dispatch: AppDispatch = useDispatch();
   const phones = useSelector(getPhones);
@@ -35,10 +35,10 @@ function HomePage() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-purple-600 to-blue-500 w-screen h-screen">
+    <div className="bg-gradient-to-r from-purple-600 to-blue-500   py-2 flex justify-center md:h-screen">
       {status === "loading" && <div>Завантаження...</div>}
       {status === "succeeded" && (
-        <ul className="flex flex-row gap-6">
+        <ul className="flex flex-col gap-2 md:gap-6 md:flex-row md:flex-wrap">
           {phones.map(
             (phone: {
               id: string;
@@ -56,12 +56,16 @@ function HomePage() {
                   width="240px"
                   className="rounded-t-md"
                 />
-                <div className="h-[157.59px]">
-                  <h3>{phone.title}</h3>
-                  <p className="text-red-100">{phone.price}</p>
+                <div className="h-[157.59px] p-6 flex flex-col ">
+                  <h3 className="font-medium text-base lg:text-lg leading-6 text-gray-700">
+                    {phone.title}
+                  </h3>
+                  <p className="font-normal text-base leading-8 text-gray-700">
+                    {phone.price}
+                  </p>
                   <button
                     onClick={() => handleAddToCart(phone)}
-                    className=" w-[128.69px] h-[36px] top-[97.59px] left-[24px] px-[26.24500274658203px] py-[10px] border border-transparent rounded-md text-white text-xs font-medium leading-4 flex items-center justify-center whitespace-nowrap"
+                    className="bg-blue-600 hover:bg-blue-800 shadow-md w-[128.69px] h-[36px] top-[97.59px] left-[24px] px-[26.24500274658203px] py-[10px] border border-transparent rounded-md text-white text-xs font-medium leading-4 flex items-center justify-center whitespace-nowrap mt-2"
                   >
                     ADD TO CART
                   </button>

@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
+
 import { fetchPhones } from "./operations";
 
 // export const fetchPhones = createAsyncThunk("phones/fetchPhones", async () => {
