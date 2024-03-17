@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { AppDispatch, RootState } from "../redux/store";
 import { getPhones } from "../redux/selectors";
 import { fetchPhones } from "../redux/operations";
-import React from "react";
+
 import "tailwindcss/tailwind.css";
 function HomePage() {
   const dispatch: AppDispatch = useDispatch();
