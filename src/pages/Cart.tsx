@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import "tailwindcss/tailwind.css";
+import { addCart } from "../redux/phonesSlice";
 
 interface Phone {
   id: string;
@@ -10,6 +12,7 @@ interface Phone {
 }
 
 function Cart() {
+  const dispatch = useDispatch();
   const [cartItems, setCartItems] = React.useState<Phone[]>(
     JSON.parse(localStorage.getItem("cartItems") || "[]")
   );
@@ -28,7 +31,8 @@ function Cart() {
 
     setTotalQuantity(quantity);
     setTotalAmount(amount);
-  }, [cartItems]);
+    dispatch(addCart(cartItems.length));
+  }, [cartItems, dispatch]);
 
   const handleDelete = (id: string) => {
     const newCartItems = cartItems.filter((phone) => phone.id !== id);

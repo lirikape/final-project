@@ -1,19 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AppDispatch, RootState } from "../redux/store";
 import { getPhones } from "../redux/selectors";
 import { fetchPhones } from "../redux/operations";
 
 import "tailwindcss/tailwind.css";
+import { addCart } from "../redux/phonesSlice";
 function HomePage() {
   const dispatch: AppDispatch = useDispatch();
   const phones = useSelector(getPhones);
   const status = useSelector((state: RootState) => state.phones.status);
   const error = useSelector((state: RootState) => state.phones.error);
+  const [cartResult, setCartResult] = useState(0);
 
   useEffect(() => {
+    dispatch(addCart(cartResult));
     dispatch(fetchPhones());
-  }, [dispatch]);
+  }, [cartResult, dispatch]);
 
   const handleAddToCart = (phone: {
     id: string;
@@ -21,7 +24,9 @@ function HomePage() {
     price: number;
     img: string;
   }) => {
+    setCartResult((prev) => prev + 1);
     const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    // const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
     const isPhoneInCart = cartItems.some(
       (item: { id: string }) => item.id === phone.id
     );
